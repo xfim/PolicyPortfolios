@@ -1,0 +1,17 @@
+Package: PolicyPortfolios
+Title: Tools for managing, measuring and visualizing policy portfolios
+Description: PolicyPortfolios simplifies the creation of data structures
+    suitable for dealing with policy portfolios, that is, two-dimensional spaces 
+    of policy instruments and policy items. It allows to generates measures of
+    their characteristics and facilitates its visualization.
+Version: 0.1
+Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>
+Author: Xavier Fernández i Marín <xavier.fim@gmail.com>
+Depends:
+    dplyr (>= 0.8),
+    tidyr (>= 0.8.2),
+    ggplot2 (>= 3.1),
+License: GPL-3
+URL: http://xavier-fim.net/packages/PolicyPortfolios, https://github.com/xfim/PolicyPortfolios
+BugReports: https://github.com/xfim/PolicyPortfolios/issues
+Encoding: UTF-8
