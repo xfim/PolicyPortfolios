@@ -202,6 +202,7 @@ pp_clean <- function(d, Sector = NULL,
   }
   D <- D %>%
     dplyr::ungroup() %>%
+    dplyr::mutate(Country = as.factor(Country)) %>%
     dplyr::mutate(Sector = as.factor(Sector)) %>%
     dplyr::mutate(Instrument = as.factor(as.character(Instrument))) %>%
     dplyr::mutate(Target = as.factor(as.character(Target))) %>%
