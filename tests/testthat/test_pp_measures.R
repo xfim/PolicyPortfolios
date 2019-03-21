@@ -15,7 +15,7 @@ test_that("pp_measures returns a only certain cases when 'id' is used", {
 })
 
 test_that("pp_measures calculates correctly", {
-            real.size <- 0.02667
+            real.size <- 0.05333
             p.size <- round(subset(pp_measures(P.education, id = list(Country = "Syldavia", Year = 2022)), Measure == "Size")$value, 5)
             expect_identical(p.size, real.size)
 })
