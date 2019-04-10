@@ -51,6 +51,15 @@ pp_clean <- function(d, Sector = NULL,
                     coding.category.name, Direction.name)]
   names(D.changes) <- c("Country", "Year", "Instrument", "Target", "cc", "direction")
 
+  # Convert the possible directions into the convenient 0, 1 and -1
+  original.direction <- D.changes$direction
+  if (length(unique(na.omit(original.direction))) > 3) {
+    stop("There are more possible directions that options for status quo, expansion or dismantling.")
+  }
+  D.changes$direction[original.direction == directions[1]] <- 0
+  D.changes$direction[original.direction == directions[2]] <- 1
+  D.changes$direction[original.direction == directions[3]] <- -1
+
   # Manage the range of the temporal scope
   year.range <- range(D.changes$Year, na.rm = TRUE)
 
