@@ -60,6 +60,26 @@ pp_clean <- function(d, Sector = NULL,
   D.changes$direction[original.direction == directions[2]] <- 1
   D.changes$direction[original.direction == directions[3]] <- -1
 
+  # Directions can not be empty
+  if (length(which(is.na(D.changes$direction) & D.changes$cc != 4)) > 0) {
+    message("There are observations with missing values in 'Directions' with\ncoding category different from 4.\nThis should not happen, as it is hard to guess what to do\n(and dangerous to make such assumptions).")
+    message(paste("Row: ", which(is.na(D.changes$direction) & D.changes$cc != 4), "\n", sep = ""))
+    message("I am going to assume they are 'Status quo' to be able to proceed.")
+    print(table(D.changes$direction, exclude = NULL))
+    D.changes$direction[is.na(D.changes$direction) & D.changes$cc != 4] <- 0
+    print(table(D.changes$direction, exclude = NULL))
+  }
+
+  # Instruments and targets can not be empty when coding category is 2
+  if (length(which(is.na(D.changes$Instrument[D.changes$cc == coding.category]))) > 0) {
+    message("There are observations with the relevant coding category and missing Instrument.")
+    message(paste("Row: ", which(is.na(D.changes$Instrument & D.changes$cc == coding.category)), "\n", sep = ""))
+  }
+  if (length(which(is.na(D.changes$Target[D.changes$cc == coding.category]))) > 0) {
+    message("There are observations with the relevant coding category and missing Target.")
+    message(paste("Row: ", which(is.na(D.changes$Target& D.changes$cc == coding.category)), "\n", sep = ""))
+  }
+
   # Manage the range of the temporal scope
   year.range <- range(D.changes$Year, na.rm = TRUE)
 
