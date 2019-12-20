@@ -68,6 +68,7 @@ pp_plot <- function(D, id = NULL,
                           "; InPr: ", round(DM$value[DM$Measure == "In.Prep"], 2),
                           "; UnCfg: ", DM$value[DM$Measure == "Unique"],
                           "; CfgEq: ", round(DM$value[DM$Measure == "C.eq"], 3),
+                          "; DivAID: ", round(DM$value[DM$Measure == "Div.aid"], 3),
                           "; DivGS: ", round(DM$value[DM$Measure == "Div.gs"], 3),
                           "; DivSh: ", round(DM$value[DM$Measure == "Div.sh"], 3),
                           sep = ""))
