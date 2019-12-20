@@ -46,7 +46,7 @@ diversity <- function(M) {
   } else {                                   # Non-empty portfolio
     M <- M[,which(apply(M, 2, sum) > 0)]
     if (is.null(dim(M))) {                   # Only one target
-      diversity <- 1
+      diversity <- 0
     } else {                                 # More than one target
       nI <- dim(M)[1]    # Number of instruments
       nrT <- dim(M)[2]   # Number of remaining targets, with at least one instrument
