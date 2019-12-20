@@ -77,19 +77,24 @@ pp_measures <- function(D, id = NULL) {
         Configurations <- length(C)
         Unique <- length(which(C == 1))
         C.eq <- 1 - ineq::Gini(C)
-        Div.gs <- 1 - mean(vegan::diversity(P, index = "simpson", MARGIN = 2))
-        Div.sh <- mean(vegan::diversity(P, index = "shannon", MARGIN = 2))
+        Div.aid <- diversity(P)
+        Div.gs <- vegan::diversity(apply(P, 1, sum), index = "simpson")
+        Div.sh <- vegan::diversity(apply(P, 1, sum), index = "shannon", base = 2)
         # On average, how many instruments per target?
         In.Prep <- sum(apply(P, 2, function(x) length(which(x > 0)))) / n.Targets
         # Arrange it in a tidy dataframe
         O.measures.value <- c(Space, Size,
                               n.Instruments, p.Instruments,
                               n.Targets, p.Targets,
-                              Unique, C.eq, Div.gs, Div.sh, In.Prep)
+                              Unique, C.eq,
+                              Div.aid, Div.gs, Div.sh,
+                              In.Prep)
         O.measures.name <- c("Space", "Size",
                              "n.Instruments", "p.Instruments",
                              "n.Targets", "p.Targets",
-                             "Unique", "C.eq", "Div.gs", "Div.sh", "In.Prep")
+                             "Unique", "C.eq",
+                             "Div.aid", "Div.gs", "Div.sh",
+                             "In.Prep")
         O.measures.label <- c("Portfolio space",
                               "Portfolio size",
                               "Number of instruments covered",
@@ -98,8 +103,8 @@ pp_measures <- function(D, id = NULL) {
                               "Proportion of targets covered",
                               "Number of unique instrument configurations",
                               "Equality of Instrument configurations",
-                              "Diversity (Gini-Simpson)",
-                              "Diversity (Shannon)",
+                              "Diversity (Average Instrument Diversity)",
+                              "Diversity (Gini-Simpson)", "Diversity (Shannon)",
                               "Instrument preponderance")
         nrep <- length(O.measures.value)
         O.full <- dplyr::data_frame(Country = rep(Countries[c], nrep),
