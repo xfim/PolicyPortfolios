@@ -80,6 +80,7 @@ pp_measures <- function(D, id = NULL) {
         Div.aid <- diversity(P)
         Div.gs <- vegan::diversity(apply(P, 1, sum), index = "simpson")
         Div.sh <- vegan::diversity(apply(P, 1, sum), index = "shannon", base = 2)
+        Eq.sh <- Div.sh / log(dim(P)[1], base = 2)
         # On average, how many instruments per target?
         In.Prep <- sum(apply(P, 2, function(x) length(which(x > 0)))) / n.Targets
         # Arrange it in a tidy dataframe
@@ -87,13 +88,13 @@ pp_measures <- function(D, id = NULL) {
                               n.Instruments, p.Instruments,
                               n.Targets, p.Targets,
                               Unique, C.eq,
-                              Div.aid, Div.gs, Div.sh,
+                              Div.aid, Div.gs, Div.sh, Eq.sh,
                               In.Prep)
         O.measures.name <- c("Space", "Size",
                              "n.Instruments", "p.Instruments",
                              "n.Targets", "p.Targets",
                              "Unique", "C.eq",
-                             "Div.aid", "Div.gs", "Div.sh",
+                             "Div.aid", "Div.gs", "Div.sh", "Eq.sh",
                              "In.Prep")
         O.measures.label <- c("Portfolio space",
                               "Portfolio size",
@@ -105,6 +106,7 @@ pp_measures <- function(D, id = NULL) {
                               "Equality of Instrument configurations",
                               "Diversity (Average Instrument Diversity)",
                               "Diversity (Gini-Simpson)", "Diversity (Shannon)",
+                              "Equitability (Shannon)",
                               "Instrument preponderance")
         nrep <- length(O.measures.value)
         O.full <- dplyr::data_frame(Country = rep(Countries[c], nrep),

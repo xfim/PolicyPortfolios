@@ -71,6 +71,7 @@ pp_plot <- function(D, id = NULL,
                           "; DivAID: ", round(DM$value[DM$Measure == "Div.aid"], 3),
                           "; DivGS: ", round(DM$value[DM$Measure == "Div.gs"], 3),
                           "; DivSh: ", round(DM$value[DM$Measure == "Div.sh"], 3),
+                          "; EqSh: ", round(DM$value[DM$Measure == "Eq.sh"], 3),
                           sep = ""))
   }
   return(f)
