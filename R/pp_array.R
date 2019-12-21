@@ -1,6 +1,6 @@
 #' Convert a tidy dataset into a matrix of policy portfolios
 #'
-#' Calculate measures of interest of a policy portfolio and plot it.
+#' Take a tidy dataset containing one or several policy portfolios and convert it into a matrix or an array.
 #'
 #' @param D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
 #' @param return_matrix Logical value indicating whether the output must be in the form of an array with Country, Sector and Year dimensions present (although equal to one), or a simplified matrix of Instruments and Targets. Defaults to FALSE.
