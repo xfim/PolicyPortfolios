@@ -50,26 +50,22 @@ diversity <- function(M) {
     } else {                                 # More than one target
       nI <- dim(M)[1]    # Number of instruments
       nrT <- dim(M)[2]   # Number of remaining targets, with at least one instrument
-      tD <- rep(NA, nrT) # To store the diversity of each target
-      for (t in 1:nrT) {
-        itDsub <- NULL
-        for (i in 1:nI) {
-          if (M[i,t] > 0) {
+      divs <- NULL       # To store all diversities between each space and the rest (excluding own Target)
+      for (t in 1:nrT) {       # Loop over targets that contain at least one intervention
+        for (i in 1:nI) {      # Loop over instruments
+          if (M[i,t] > 0) {    #   ... and check that instruments contain at least one intervention
             # Exclude the current target, and keep it a matrix
             M.exc <- M[,-t, drop = FALSE]
             # Now calculate the probability that the rest of the targets
             # contain a *different* instrument as the current one
-            tDsub <- NULL
-            for (tt in 1:(dim(M.exc)[2])) {
-              prob.equal <- M.exc[i,tt] / sum(M.exc[,tt])
-              tDsub <- c(tDsub, 1 - prob.equal)
-            }
-            av.tDsub <- mean(tDsub)
+            different.instruments <- sum(M.exc[-i,]) # Number of different instruments means excluding current reference instrument
+            # Divide the total number of different instruments over all possible spaces outside the current target
+            prob.matches <- different.instruments / sum(M.exc)
+            divs <- c(divs, prob.matches)
           }
         }
-        tD[t] <- mean(av.tDsub)
       }
-      diversity <- mean(tD)
+      diversity <- mean(divs)
     }
   }
   return(diversity)
