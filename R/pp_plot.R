@@ -47,7 +47,7 @@ pp_plot <- function(D, id = NULL,
     f <- f + geom_tile()
   }
   f <- f +
-    scale_fill_manual(values = c("white", "black")) +
+    scale_fill_manual(values = c("0" = "white", "1" = "black")) +
     theme_minimal() +
     ggtitle(do.call("paste", c(id.label, sep = " : "))) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
