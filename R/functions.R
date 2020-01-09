@@ -41,31 +41,35 @@ pass.id <- function(D, id = NULL) {
 #' @param M Matrix with two dimensions (Instrument, Target) containing absence (0) or presence (1) of policy intervention.
 #' @return A value of the portfolio diversity.
 diversity <- function(M) {
-  if (sum(M) == 0) {
-    diversity <- 0                           # Empty portfolio
-  } else {                                   # Non-empty portfolio
-    M <- M[,which(apply(M, 2, sum) > 0)]
-    if (is.null(dim(M))) {                   # Only one target
-      diversity <- 0
-    } else {                                 # More than one target
-      nI <- dim(M)[1]    # Number of instruments
-      nrT <- dim(M)[2]   # Number of remaining targets, with at least one instrument
-      divs <- NULL       # To store all diversities between each space and the rest (excluding own Target)
-      for (t in 1:nrT) {       # Loop over targets that contain at least one intervention
-        for (i in 1:nI) {      # Loop over instruments
-          if (M[i,t] > 0) {    #   ... and check that instruments contain at least one intervention
-            # Exclude the current target, and keep it a matrix
-            M.exc <- M[,-t, drop = FALSE]
-            # Now calculate the probability that the rest of the targets
-            # contain a *different* instrument as the current one
-            different.instruments <- sum(M.exc[-i,]) # Number of different instruments means excluding current reference instrument
-            # Divide the total number of different instruments over all possible spaces outside the current target
-            prob.matches <- different.instruments / sum(M.exc)
-            divs <- c(divs, prob.matches)
+  if (is.na(sum(M))) {
+    diversity <- NA
+  } else {
+    if (sum(M) == 0) {
+      diversity <- 0                           # Empty portfolio
+    } else {                                   # Non-empty portfolio
+      M <- M[,which(apply(M, 2, sum) > 0)]
+      if (is.null(dim(M))) {                   # Only one target
+        diversity <- 0
+      } else {                                 # More than one target
+        nI <- dim(M)[1]    # Number of instruments
+        nrT <- dim(M)[2]   # Number of remaining targets, with at least one instrument
+        divs <- NULL       # To store all diversities between each space and the rest (excluding own Target)
+        for (t in 1:nrT) {       # Loop over targets that contain at least one intervention
+          for (i in 1:nI) {      # Loop over instruments
+            if (M[i,t] > 0) {    #   ... and check that instruments contain at least one intervention
+              # Exclude the current target, and keep it a matrix
+              M.exc <- M[,-t, drop = FALSE]
+              # Now calculate the probability that the rest of the targets
+              # contain a *different* instrument as the current one
+              different.instruments <- sum(M.exc[-i,]) # Number of different instruments means excluding current reference instrument
+              # Divide the total number of different instruments over all possible spaces outside the current target
+              prob.matches <- different.instruments / sum(M.exc)
+              divs <- c(divs, prob.matches)
+            }
           }
         }
+        diversity <- mean(divs)
       }
-      diversity <- mean(divs)
     }
   }
   return(diversity)
