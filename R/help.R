@@ -7,7 +7,7 @@
 #'
 #' @references \url{http://xavier-fim.net/packages/PolicyPortfolios}.
 #' @import ggplot2
-#' @importFrom dplyr data_frame tbl_df filter mutate bind_rows case_when arrange %>%
+#' @importFrom dplyr data_frame as_tibble filter mutate bind_rows case_when arrange %>%
 #' @importFrom vegan diversity
 #' @importFrom ineq Gini
 #' @importFrom mgcv uniquecombs

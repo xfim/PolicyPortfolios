@@ -91,7 +91,7 @@ pp_clean <- function(d, Sector = NULL,
                    Year = as.integer(seq(year.range[1], year.range[2], by = 1)),
 #                   covered = 0) %>% # Assumption
                    covered = NA) %>% # Assumption
-    dplyr::tbl_df()
+    dplyr::as_tibble()
 
   if (debug) {
     message(paste("The size of the final data frame is ", dim(D)[1], " observations.", sep = ""))

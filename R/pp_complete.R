@@ -49,7 +49,7 @@ pp_complete <- function(D, year.range = NULL,
                       Year = as.integer(seq(year.range[1], year.range[2])),
                       Instrument = Instrument.set,
                       Target = Target.set) %>%
-    tbl_df()
+    as_tibble()
 
   # For the new sets of spaces assume that they are empty
   D <- suppressWarnings(dplyr::left_join(Full, Original, 
