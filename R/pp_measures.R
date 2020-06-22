@@ -133,7 +133,7 @@ pp_measures <- function(D, id = NULL) {
       message(paste0("Cleaning years from ", clean.countries[c]))
       extra.years <- as.vector(filter(D.years.yn, Country == clean.countries[c] & N == 0)$Year)
       O <- O %>%
-        filter(Country != clean.countries[c] | (Country == clean.countries[] & !(Year %in% extra.years)))
+        filter(!(Country == clean.countries[c] & Year %in% extra.years))
     }
   }
   return(O)
