@@ -109,7 +109,7 @@ pp_measures <- function(D, id = NULL) {
                               "Equitability (Shannon)",
                               "Instrument preponderance")
         nrep <- length(O.measures.value)
-        O.full <- dplyr::data_frame(Country = rep(Countries[c], nrep),
+        O.full <- dplyr::tibble(Country = rep(Countries[c], nrep),
                                     Sector = rep(Sectors[s], nrep),
                                     Year = rep(Years[y], nrep),
                                     Measure = O.measures.name,
