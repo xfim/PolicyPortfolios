@@ -28,7 +28,11 @@ pass.id <- function(D, id = NULL) {
       D <- filter(D, Year %in% id$Year)
     }
   }
-  return(D)
+  if (dim(D)[1] > 0) {
+    return(D)
+  } else {
+    return(NULL)
+  }
 }
 
 #' Calculate portfolio diversity

@@ -6,7 +6,7 @@
 #' @param id A list with up to two elements, namely "Country", and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed. Defaults to NULL to process all portfolios.
 #' @param file Character vector with the name of the file to create. Defaults to a combination of the date and time of production and policy portfolio report.
 #' @param title A character vector with the title of the report. If no title is passed, the default (NULL) is to use the id, or a generic title with the date and time of its production.
-#' @param plot A character vector with the types of plot to perform. If no plot is desired, set it to NULL. By defaults it plots individual portfolios ("single") as well as comparative figures with portfolio measures ("comparative").
+#' @param plot A character vector with the types of plot to perform. If no plot is desired, set it to NULL. By default it plots individual portfolios ("single") as well as comparative figures with portfolio measures ("comparative").
 #' @param text A logical vector of whether in the case of single portfolios a textual report should be included.
 #' @param width A number with the width of the device for individual portfolio figures. Defaults to 12 for the svg device.
 #' @param height A number with the width of the device for individual portfolio figures. Defaults to 7 for the svg device.
@@ -105,26 +105,29 @@ pp_report <- function(D, id = NULL, file = NULL, title = NULL,
         Country <- levels(D$Country)[c]
         for (y in 1:length(unique(D$Year))) {
           Year <- unique(D$Year)[y]
-          cat(paste("## ", paste(Country, Sector, Year, sep = " : ")), "\n", sep = "")
+          DT <- pp_measures(D, id = list(Sector = Sector,  Country = Country, Year = Year))
+          if (!is.null(DT)) {
+            cat(paste("## ", paste(Country, Sector, Year, sep = " : ")), "\n", sep = "")
 
-          # Report quantities of interest
-          if (text) {
-            DT <- pp_measures(D, id = list(Sector = Sector,  Country = Country, Year = Year))
-            cat("\n\n")
-            cat(paste("- *Space*: ", DT$value[DT$Measure == "Space"], "\n", sep = ""))
-            cat(paste("- *Size*: ", round(DT$value[DT$Measure == "Size"], 3), "\n", sep = ""))
-            cat(paste("- *Instruments*: ", DT$value[DT$Measure == "n.Instruments"], " (", round(DT$value[DT$Measure == "p.Instruments"] * 100, 2), "%)", "\n", sep = ""))
-            cat(paste("- *Targets*: ", DT$value[DT$Measure == "n.Targets"], " (", round(DT$value[DT$Measure == "p.Targets"] * 100, 2), "%)", "\n", sep = ""))
-            cat(paste("- *Instrument preponderance*: ", round(DT$value[DT$Measure == "In.Prep"], 3), "\n", sep = ""))
-            cat(paste("- *Unique configurations (Instrument)*: ", DT$value[DT$Measure == "Unique"], "\n", sep = ""))
-            cat(paste("- *Configuration equality (Instrument)*: ", round(DT$value[DT$Measure == "C.eq"], 3), "\n", sep = ""))
-            cat(paste("- *Diversity (Gini-Simpsons)*: ", round(DT$value[DT$Measure == "Div.gs"], 3), "\n", sep = ""))
-            cat(paste("- *Diversity (Shannon)*: ", round(DT$value[DT$Measure == "Div.sh"], 3), "\n", sep = ""))
-            cat("\n\n")
+            # Report quantities of interest
+            if (text) {
+              DT <- pp_measures(D, id = list(Sector = Sector,  Country = Country, Year = Year))
+              cat("\n\n")
+              cat(paste("- *Space*: ", DT$value[DT$Measure == "Space"], "\n", sep = ""))
+              cat(paste("- *Size*: ", round(DT$value[DT$Measure == "Size"], 3), "\n", sep = ""))
+              cat(paste("- *Instruments*: ", DT$value[DT$Measure == "n.Instruments"], " (", round(DT$value[DT$Measure == "p.Instruments"] * 100, 2), "%)", "\n", sep = ""))
+              cat(paste("- *Targets*: ", DT$value[DT$Measure == "n.Targets"], " (", round(DT$value[DT$Measure == "p.Targets"] * 100, 2), "%)", "\n", sep = ""))
+              cat(paste("- *Instrument preponderance*: ", round(DT$value[DT$Measure == "In.Prep"], 3), "\n", sep = ""))
+              cat(paste("- *Unique configurations (Instrument)*: ", DT$value[DT$Measure == "Unique"], "\n", sep = ""))
+              cat(paste("- *Configuration equality (Instrument)*: ", round(DT$value[DT$Measure == "C.eq"], 3), "\n", sep = ""))
+              cat(paste("- *Diversity (Gini-Simpsons)*: ", round(DT$value[DT$Measure == "Div.gs"], 3), "\n", sep = ""))
+              cat(paste("- *Diversity (Shannon)*: ", round(DT$value[DT$Measure == "Div.sh"], 3), "\n", sep = ""))
+              cat("\n\n")
+            }
+
+            # Produce figures
+            cat(paste("```{r, echo = FALSE, fig.width = ", width, ", fig.height = ", height, "}\npp_plot(D, id = list(Country = \"", Country, "\", Sector = \"", Sector, "\", Year = \"", Year, "\"))\n```\n\n", sep = ""))
           }
-
-          # Produce figures
-          cat(paste("```{r, echo = FALSE, fig.width = ", width, ", fig.height = ", height, "}\npp_plot(D, id = list(Country = \"", Country, "\", Sector = \"", Sector, "\", Year = \"", Year, "\"))\n```\n\n", sep = ""))
         }
       }
     }

@@ -18,6 +18,10 @@ pp_measures <- function(D, id = NULL) {
   # Manage passing only certain portfolio identificators
   if (!is.null(id)) {
     D <- pass.id(D, id)
+    if (is.null(D)) {
+      #message("There are no spaces to process. Broaden the country/year.")
+      return(NULL)
+    }
   }
 
   # In case of more than one sector
