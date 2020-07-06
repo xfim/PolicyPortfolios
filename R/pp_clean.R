@@ -103,7 +103,7 @@ pp_clean <- function(d, Sector = NULL,
 
   # Sort the policy changes to translate them into the tidy portfolio
   D.changes <- D.changes %>%
-    dplyr::tbl_df() %>%
+    dplyr::as_tibble() %>%
     dplyr::filter(cc == coding.category) %>%
     dplyr::group_by(Country, Instrument, Target) %>%
     dplyr::arrange(Country, Instrument, Target, Year)
