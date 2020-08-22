@@ -22,10 +22,10 @@ configurations <- function(M) {
 pass.id <- function(D, id = NULL) {
   if (!is.null(id)) {
     if (!is.null(id$Country)) {
-      D <- filter(D, Country %in% id$Country)
+      D <- dplyr::filter(D, Country %in% id$Country)
     }
     if (!is.null(id$Year)) {
-      D <- filter(D, Year %in% id$Year)
+      D <- dplyr::filter(D, Year %in% id$Year)
     }
   }
   if (dim(D)[1] > 0) {

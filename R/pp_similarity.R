@@ -31,21 +31,21 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
   # In case of portfolios not covering the same years
   clean.years <- FALSE
   D.years <- D %>%
-    select(Country, Year) %>%
+    dplyr::select(Country, Year) %>%
     unique()
   D.years.n <- D.years %>%
-    group_by(Country) %>%
-    summarize(N = n())
+    dplyr::group_by(Country) %>%
+    dplyr::summarize(N = n())
   if (length(unique(D.years.n$N)) > 1) {
     message("At least one portfolio contains a different number of years.")
     clean.years <- TRUE
     # This is used later in the cleaning of the extra years
     D.years.yn <- D.years %>%
-      group_by(Country, Year) %>%
-      summarize(N = n()) %>%
+      dplyr::group_by(Country, Year) %>%
+      dplyr::summarize(N = n()) %>%
       ungroup() %>%
-      spread(Year, N, fill = 0) %>%
-      gather(Year, N, -Country)
+      tidyr::spread(Year, N, fill = 0) %>%
+      tidyr::gather(Year, N, -Country)
   }
 
 
@@ -142,32 +142,32 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
       }
     }
   }
-  O <- as_tibble(dplyr::bind_rows(O))
+  O <- dplyr::as_tibble(dplyr::bind_rows(O))
 
   O <- O %>%
-    mutate(Country = factor(as.character(Country))) %>%
-    mutate(Country.destination = factor(as.character(Country.destination))) %>%
-    mutate(Sector = factor(as.character(Sector))) %>%
-    mutate(Year = as.integer(as.numeric(Year))) %>%
-    mutate(Year.destination = as.integer(as.numeric(Year.destination))) %>%
-    mutate(Method = factor(as.character(Method))) %>%
-    mutate(Method.label = factor(as.character(Method.label)))
+    dplyr::mutate(Country = factor(as.character(Country))) %>%
+    dplyr::mutate(Country.destination = factor(as.character(Country.destination))) %>%
+    dplyr::mutate(Sector = factor(as.character(Sector))) %>%
+    dplyr::mutate(Year = as.integer(as.numeric(Year))) %>%
+    dplyr::mutate(Year.destination = as.integer(as.numeric(Year.destination))) %>%
+    dplyr::mutate(Method = factor(as.character(Method))) %>%
+    dplyr::mutate(Method.label = factor(as.character(Method.label)))
 
   # Post-process values to arrange infinite and NaN
   O <- O %>%
-    mutate(value = ifelse(is.infinite(value), 1, value)) %>%
-    mutate(value = ifelse(is.nan(value), 0, value)) %>%
-    rename(Similarity = value)
+    dplyr::mutate(value = ifelse(is.infinite(value), 1, value)) %>%
+    dplyr::mutate(value = ifelse(is.nan(value), 0, value)) %>%
+    dplyr::rename(Similarity = value)
 
   # Clean years for which some countries do not have data
   if (clean.years) {
     clean.countries <- as.character(D.years.n$Country[D.years.n$N < max(D.years.n$N)])
     for (c in 1:length(clean.countries)) {
       message(paste0("Cleaning years from ", clean.countries[c]))
-      extra.years <- as.vector(filter(D.years.yn, Country == clean.countries[c] & N == 0)$Year)
+      extra.years <- as.vector(dplyr::filter(D.years.yn, Country == clean.countries[c] & N == 0)$Year)
       O <- O %>%
-        filter(!(Country == clean.countries[c] & Year %in% extra.years)) %>%
-        filter(!(Country.destination == clean.countries[c] & Year %in% extra.years))
+        dplyr::filter(!(Country == clean.countries[c] & Year %in% extra.years)) %>%
+        dplyr::filter(!(Country.destination == clean.countries[c] & Year %in% extra.years))
     }
   }
 

@@ -159,7 +159,7 @@ pp_report <- function(D, id = NULL, file = NULL, title = NULL,
     if ("static" %in% comparative) {
       w <- 10; h <- 8
       cat("```{r echo = FALSE}
-      DMY <- filter(DM, Year == max(Year))
+      DMY <- dplyr::filter(DM, Year == max(Year))
       f <- ggplot(DMY, aes(x = value, y = Country, color = Sector)) +
         geom_point() +
         facet_wrap(~ Measure, scales = \"free_x\")
