@@ -12,6 +12,7 @@
 #' @param coding.category Numerical value with the level of the category that captures the combination of instrument and target.
 #' @param Direction.name Character vector of length one with the name of the variable that contains the direction of the policy change. 
 #' @param directions Numerical vector with the numeric values of the direction of the policy changes, namely "Status quo", "Expansion" and "Dismantling". Defaults to, 0, 1 and -1, respectively.
+#' @param associated.vars Character vector indicating variables that contain characteristics of the policy space.
 #' @param debug Logical value. When TRUE, print more verbose information about the cleaning process.
 #' @return D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
 #' @export
@@ -28,6 +29,7 @@ pp_clean <- function(d, Sector = NULL,
                      coding.category.name = "Coding category", coding.category = 2,
                      Direction.name = "Direction",
                      directions = c(0, 1, -1),
+                     associated.vars = NULL,
                      debug = FALSE) {
 
   # Require a file and a sector
@@ -46,10 +48,23 @@ pp_clean <- function(d, Sector = NULL,
     stop("It has not been possible to identify the variable containing the Target names.")
   }
 
+  # Ensure that associated variables is passed correctly
+  if (!is.null(associated.vars)) {
+    if (class(associated.vars) != "character") {
+      stop("Associated variables must be possed using a character vector")
+    }
+  }
+
   # Clarify the dataset containing the policy changes
-  D.changes <- d[,c(Country.name, Year.name, Instrument.name, Target.name,
-                    coding.category.name, Direction.name)]
-  names(D.changes) <- c("Country", "Year", "Instrument", "Target", "cc", "direction")
+  if (is.null(associated.vars)) {
+    D.changes <- d[,c(Country.name, Year.name, Instrument.name, Target.name,
+                      coding.category.name, Direction.name)]
+    names(D.changes) <- c("Country", "Year", "Instrument", "Target", "cc", "direction")
+  } else {
+    D.changes <- d[,c(Country.name, Year.name, Instrument.name, Target.name,
+                      coding.category.name, Direction.name, associated.vars)]
+    names(D.changes) <- c("Country", "Year", "Instrument", "Target", "cc", "direction", associated.vars)
+  }
 
   # Convert the possible directions into the convenient 0, 1 and -1
   original.direction <- D.changes$direction
@@ -92,6 +107,13 @@ pp_clean <- function(d, Sector = NULL,
 #                   covered = 0) %>% # Assumption
                    covered = NA) %>% # Assumption
     dplyr::as_tibble()
+  if (!is.null(associated.vars)) {
+    for (av in 1:length(associated.vars)) {
+      D <- mutate(D, avname = NA)
+      class(D$avname) <- class(eval(parse(text = paste0("d$`", associated.vars[av], "`"))))
+      names(D)[dim(D)[2]] <- associated.vars[av]
+    }
+  }
 
   if (debug) {
     message(paste("The size of the final data frame is ", dim(D)[1], " observations.", sep = ""))
@@ -122,6 +144,7 @@ pp_clean <- function(d, Sector = NULL,
               D$Instrument == D.changes$Instrument[o] & 
               D$Target == D.changes$Target[o] & 
               D$Year < D.changes$Year[o])
+    associated.vars.now <- D.changes[o, associated.vars]
 
     # Inspect the scenarios and judge what to do
     if (is.na(value.now) & direction.now == 1) {
@@ -228,6 +251,10 @@ pp_clean <- function(d, Sector = NULL,
       }
     }
 
+    if (!is.null(associated.vars)) {
+      D[position.now, associated.vars] <- associated.vars.now
+    }
+
   }
   D <- D %>%
     dplyr::ungroup() %>%
@@ -238,8 +265,12 @@ pp_clean <- function(d, Sector = NULL,
     # If nothing has happened in a policy space, then assume it has not been covered
     dplyr::mutate(covered = ifelse(is.na(covered), 0, covered)) %>%
     dplyr::mutate(covered = as.integer(covered)) %>%
-    dplyr::select(Country, Sector, Year, Instrument, Target, covered) %>%
     dplyr::arrange(Sector, Country, Instrument, Target, Year)
+  if (is.null(associated.vars)) {
+    D <- dplyr::select(D, Country, Sector, Year, Instrument, Target, covered)
+  } else {
+    D <- dplyr::select(D, Country, Sector, Year, Instrument, Target, covered, associated.vars)
+  }
 
   return(D)
 }
