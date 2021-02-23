@@ -5,13 +5,17 @@
 #' @param D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
 #' @param id A list with up to two elements, namely "Country", and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed. Defaults to NULL to process all portfolios.
 #' @return A tidy dataset containing the portfolio identificators (Country, Sector and Year) plus the Measure identificators (Measure and Measure.label) and the value of the portfolio characteristic.
+#' @seealso \code{\link{diversity}} for Average Instrument Diversity, \code{\link[ineq]{Gini}}, \code{\link[vegan]{diversity}} \code{\link{configurations}}.
+#' @references Fernández-i-Marín, X., Knill, C. & Steinebach, Y. (2021). Studying Policy Design Quality in Comparative Perspective. _American Political Science Review_, online first. For Average Instrument Diversity.
+#' @references Adam, C., Knill, C. & Fernández-i-Marín, X. (2016). Rule growth and government effectiveness: why it takes the capacity to learn and coordinate to constrain rule growth. _Policy Sciences_, 50, 241–268. doi:10.1007/s11077-016-9265-x. For portfolio size.
 #' @export
 #' @examples
-#' data(PolicyPortfolio)
+#' data(P.education)
 #' m.education <- pp_measures(P.education)
 #' m.education
 #'
 #' # Calculate portfolio measures for a restricted set of portfolios defined by a list.
+#' data(P.energy)
 #' m.energy <- pp_measures(P.energy, id = list(Country = "Borduria", Year = 2022))
 #' m.energy
 pp_measures <- function(D, id = NULL) {
@@ -36,14 +40,14 @@ pp_measures <- function(D, id = NULL) {
     unique()
   D.years.n <- D.years %>%
     dplyr::group_by(Country) %>%
-    dplyr::summarize(N = n())
+    dplyr::summarize(N = dplyr::n())
   if (length(unique(D.years.n$N)) > 1) {
     message("At least one portfolio contains a different number of years.")
     clean.years <- TRUE
     # This is used later in the cleaning of the extra years
     D.years.yn <- D.years %>%
       dplyr::group_by(Country, Year) %>%
-      dplyr::summarize(N = n()) %>%
+      dplyr::summarize(N = dplyr::n()) %>%
       dplyr::ungroup() %>%
       tidyr::spread(Year, N, fill = 0) %>%
       tidyr::gather(Year, N, -Country)

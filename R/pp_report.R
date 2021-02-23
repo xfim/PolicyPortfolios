@@ -19,7 +19,7 @@
 #' @export
 #' @examples
 #'\dontrun{
-#' data(PolicyPortfolio)
+#' data(P.education)
 #' pp_report(P.education)
 #'
 #' pp_report(P.education, id = list(Country = "Borduria", Year = 2025))

@@ -10,7 +10,7 @@
 #' @return A tidy dataset containing the portfolio identificators (Country, Sector and Year) plus the Measure identificators (Measure and Measure.label) and the value of the portfolio characteristic.
 #' @export
 #' @examples
-#' data(PolicyPortfolio)
+#' data(P.education)
 #' pp_plot(P.education, id = list(Country = "Borduria", Year = 2025))
 pp_plot <- function(D, id = NULL,
                     spacing = FALSE,

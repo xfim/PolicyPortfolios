@@ -10,7 +10,7 @@
 #' @return D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors. It differs from the input in that this one includes the full set of pre-specified Instruments, Targets and temporal range.
 #' @export
 #' @examples
-#' data(PolicyPortfolio)
+#' data(P.education)
 #' range(P.education$Year)
 #'
 #' P.education.full <- pp_complete(P.education, year.range = c(2000, 2035))

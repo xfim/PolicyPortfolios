@@ -7,7 +7,7 @@
 #' @return An array when return_single is FALSE (the default), or a two-dimensional matrix with Instruments and Targets as first and second dimensions, respectively.
 #' @export
 #' @examples
-#' data(PolicyPortfolio)
+#' data(P.education)
 #' # Returns an array
 #' A <- pp_array(P.education)
 #' dim(A)

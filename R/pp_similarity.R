@@ -10,7 +10,7 @@
 #' @export
 #' @examples
 #'\dontrun{
-#' data(PolicyPortfolio)
+#' data(P.education)
 #' pp_similarity(P.education, id = list(Year = 2025))
 #'}
 pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
@@ -35,14 +35,14 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
     unique()
   D.years.n <- D.years %>%
     dplyr::group_by(Country) %>%
-    dplyr::summarize(N = n())
+    dplyr::summarize(N = dplyr::n())
   if (length(unique(D.years.n$N)) > 1) {
     message("At least one portfolio contains a different number of years.")
     clean.years <- TRUE
     # This is used later in the cleaning of the extra years
     D.years.yn <- D.years %>%
       dplyr::group_by(Country, Year) %>%
-      dplyr::summarize(N = n()) %>%
+      dplyr::summarize(N = dplyr::n()) %>%
       ungroup() %>%
       tidyr::spread(Year, N, fill = 0) %>%
       tidyr::gather(Year, N, -Country)
@@ -57,8 +57,8 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
   all.methods <- c("Jaccard", "Hamming", "Dice", "Overlap", "Rand")
   all.methods.labels <- c("Similarity (Jaccard)", 
                           "Similarity (Hamming)",
-                          "Similarity (Sørensen–Dice)",
-                          "Similarity (Szymkiewicz–Simpson)",
+                          "Similarity (S\u00f8rensen\u002DDice)",
+                          "Similarity (Szymkiewicz\u002DSimpson)",
                           "Similarity (Rand or Simple Matching Coefficient)")
   if (length(method) == 1) {
     if (method == "all") {
