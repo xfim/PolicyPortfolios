@@ -13,19 +13,34 @@ configurations <- function(M) {
 
 #' Subset a full dataset with only certain cases (Country / Year)
 #'
-#' Internal function used to select a subset of cases (Country / Year)
+#' Internal function used to select a subset of cases (Country / Sector / Year)
 #' from a tidy dataset with portfolio data.
+#' When subsetting a sector, the remaining object limits the results to the available
+#' Instruments and Sectors found in the original object.
 #'
 #' @param D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
-#' @param id A list with up to two elements, namely "Country", and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed.
-#' @return A Data frame with a subsect of D defined by id.
+#' @param id A list with up to three elements, namely "Country", "Sector" and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed; and optionally "clean" (logical, FALSE by default) to remove non observed factor levels in Instruments, Targets, Country, Sector and Year.
+#' @return A Data frame (tibble) with a part of the original input, defined by id.
 pass.id <- function(D, id = NULL) {
   if (!is.null(id)) {
+    if (!is.null(id$Sector)) {
+      D <- dplyr::filter(D, Sector %in% id$Sector)
+    }
     if (!is.null(id$Country)) {
       D <- dplyr::filter(D, Country %in% id$Country)
     }
     if (!is.null(id$Year)) {
       D <- dplyr::filter(D, Year %in% id$Year)
+    }
+    if (!is.null(id$clean)) {
+      if (is.logical(id$clean)) {
+        if (id$clean == TRUE) {
+          D <- droplevels(D)
+          message("\nOnly observed Instruments and Targets have been kept in the restricted portfolio.\nDon't forget to ensure that the portfolio is complete with pp_complete().")
+        }
+      } else {
+        stop("'clean' needs a logical argument (TRUE / FALSE).")
+      }
     }
   }
   if (dim(D)[1] > 0) {
@@ -35,15 +50,27 @@ pass.id <- function(D, id = NULL) {
   }
 }
 
-#' Calculate portfolio diversity
+#' Calculate portfolio diversity (Average Instrument Diversity)
 #'
-#' Internal function used to calculate the diversity of a portfolio.
-#' It is based on the idea of a Gini-Simpson diversity index.
+#' Internal function used to calculate the diversity of a portfolio (Average Instrument Diversity, AID).
+#' It is adapted from the idea of a Gini-Simpson diversity index.
 #' The measure can be interpreted as the average probability that picking two
 #' policy spaces from different Targets, they use a different Instrument.
 #'
 #' @param M Matrix with two dimensions (Instrument, Target) containing absence (0) or presence (1) of policy intervention.
 #' @return A value of the portfolio diversity.
+#' @references Fernández-i-Marín, X., Knill, C. & Steinebach, Y. (2021). Studying Policy Design Quality in Comparative Perspective. _American Political Science Review_, online first.
+#' @examples
+#' data(consensus)
+#' consensus %>%
+#'   filter(Sector == "Environmental") %>%
+#'   filter(Country %in% c("France", "United States")) %>%
+#'   filter(Year %in% c(1976, 2005)) %>%
+#'   pp_array() %>%
+#'   apply(., c(1, 2, 3), diversity) %>%
+#'   as.vector() %>%
+#'   round(digits = 3)
+#' # 1976 (FR, US), 2005 (FR, US)
 diversity <- function(M) {
   if (is.na(sum(M))) {
     diversity <- NA
