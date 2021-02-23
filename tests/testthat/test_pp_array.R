@@ -1,8 +1,9 @@
 require(testthat)
-data(PolicyPortfolio)
+data(P.education)
+data(P.energy)
 context("Convert to array")
 
-test_that("pp_array onverts tidy dataset to array", {
+test_that("pp_array converts tidy dataset to array", {
             real.dim <- as.integer(c(3, 1, 11, 10, 15))
             expect_identical(dim(pp_array(P.education)), real.dim)
 })
