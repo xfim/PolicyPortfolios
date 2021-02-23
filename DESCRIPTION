@@ -1,12 +1,14 @@
 Package: PolicyPortfolios
-Title: Tools for managing, measuring and visualizing policy portfolios
-Description: PolicyPortfolios simplifies the creation of data structures
+Title: Tools for Managing, Measuring and Visualizing Policy Portfolios
+Description: Tools for simplifying the creation and management of data structures
     suitable for dealing with policy portfolios, that is, two-dimensional spaces 
-    of policy instruments and policy targets. It allows to generates measures of
-    their characteristics and facilitates its visualization.
+    of policy instruments and policy targets. The package also allows to generate measures of
+    portfolio characteristics and facilitates their visualization.
 Version: 0.1
+Authors@R: person(given = "Xavier", family = "Fernández i Marín", email = "xavier.fim@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9522-8870"))
 Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>
-Author: Xavier Fernández i Marín <xavier.fim@gmail.com>
+Depends:
+    R (>= 3.5)
 Imports:
     dplyr,
     ggplot2,
@@ -16,13 +18,13 @@ Imports:
     reshape2,
 Suggests:
     testthat,
+    devtools,
     rmarkdown,
     knitr,
     tidyr,
-    devtools,
 License: GPL-3
-URL: http://xavier-fim.net/packages/PolicyPortfolios, https://github.com/xfim/PolicyPortfolios
+URL: http://xavier-fim.net/packages/PolicyPortfolios/, https://github.com/xfim/PolicyPortfolios
 BugReports: https://github.com/xfim/PolicyPortfolios/issues
 Encoding: UTF-8
-RoxygenNote: 6.1.1
+RoxygenNote: 7.1.1
 VignetteBuilder: knitr
