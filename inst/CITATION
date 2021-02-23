@@ -1,20 +1,48 @@
-bibentry(bibtype = "Article",
-  title        = "{PolicyPortfolios}: Analysis of {MCMC} Samples and {B}ayesian Inference",
+bibentry(bibtype = "Manual",
+  title        = "Using PolicyPortfolios",
   author       = person(given = "Xavier",
                         family = "Fern{\\'a}ndez-i-Mar{\\'i}n",
                         email = "xavier.fim@gmail.com"),
-  journal      = "Journal of Statistical Software",
-  year         = "2016",
-  volume       = "70",
-  number       = "9",
-  pages        = "1--20",
-  doi          = "10.18637/jss.v070.i09",
-
-  header       = "To cite ggmcmc in publications use:",
+  year         = "2020",
+  url          = "http://xavier-fim.net/post/using_policyportfolios/",
+  header       = "When using the package, please cite:",
   textVersion  =
-  paste("Xavier Fernández i Marín (2016).",
-        "ggmcmc: Analysis of MCMC Samples and Bayesian Inference.",
-        "Journal of Statistical Software, 70(9), 1-20.",
-        "doi:10.18637/jss.v070.i09")
+  paste("Fernández-i-Marín (2020): Using PolicyPortfolios")
+)
+bibentry(bibtype = "Article",
+  title        = "{Studying Policy Design Quality in Comparative Perspective}",
+  author       = c(person(given = "Xavier",
+                          family = "Fern{\\'a}ndez-i-Mar{\\'i}n",
+                          email = "xavier.fim@gmail.com"),
+                   person(given = "Christoph",
+                          family = "Knill"),
+                   person(given = "Yves",
+                          family = "Steinebach")),
+  journal      = "American Political Science Review",
+  year         = "2021",
+  header       = "When using the CONSENSUS dataset, please cite:",
+  textVersion  =
+  paste(
+    "Fernández-i-Marín, Knill, Steinebach (2021).",
+    "Studying Policy Design Quality in Comparative Perspective. ",
+    "American Political Science Review.", "online first")
+)
+bibentry(bibtype = "Article",
+  title        = "{Regulatory Policy Outputs and Impacts. Exploring a Complex Relationship}",
+  author       = c(person(given = "Christoph", family = "Knill"),
+                   person(given = "K.", family = "Schulze"),
+                   person(given = "J.", family = "Tosun")),
+  journal      = "Regulation & Governance",
+  year         = "2012",
+  volume       = "5",
+  issue        = "4",
+  pages        = "427-444",
+  doi          = "10.1111/j.1748-5991.2012",
+  header       = "When using the CONSENSUS dataset, please cite:",
+  textVersion  =
+  paste("Knill, Schulze & Tosun (2012).",
+        "Regulatory Policy Outputs and Impacts. Exploring a Complex Relationship. ",
+        "Regulation & Governance, 5(4), 427-444.",
+        "doi:10.1111/j.1748-5991.2012")
 )
 
