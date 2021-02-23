@@ -1,14 +1,14 @@
 require(testthat)
-data(PolicyPortfolio)
+data(P.education)
 context("Measures of policy portfolios")
 
 test_that("pp_measures converts tidy dataset to matrix", {
-            real.dim <- as.integer(c(363, 6))
+            real.dim <- as.integer(c(429, 6))
             expect_identical(dim(pp_measures(P.education)), real.dim)
 })
 
 test_that("pp_measures returns a only certain cases when 'id' is used", {
-            real.dim <- as.integer(c(22, 6))
+            real.dim <- as.integer(c(26, 6))
             expect_identical(dim(pp_measures(P.education, 
                                              id = list(Country = c("San Theodoros", "Syldavia"), Year = 2022))), 
                              real.dim)
