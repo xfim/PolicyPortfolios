@@ -3,7 +3,7 @@ title: Using the PolicyPortfolios package
 author: Xavier Fernández-i-Marín
 date: "`r format(Sys.time(), '%d/%m/%Y')` - Version `r packageVersion('PolicyPortfolios')`"
 classoption: a4paper,justified
-abstract: PolicyPortfolios is an R packaged aimed at simplifying the creation of data structures suitable for dealing with policy portfolios, that is, two-dimensional spaces of policy instruments and policy targets. It allows to generates measures of their characteristics and facilitates its visualization.
+abstract: PolicyPortfolios is an R package aimed at simplifying the creation of data structures suitable for dealing with policy portfolios, that is, two-dimensional spaces of policy instruments and policy targets. It allows to generates measures of their characteristics and facilitates its visualization.
 bibliography: ./bibliography.bib
 output:
   rmarkdown::html_vignette
@@ -54,19 +54,19 @@ The input data required for the package to work with is a tidy dataset
 [@wickham:2014:tidy], where every observation is a row and every variable is
 a column. This makes the data easy to manipulate, model and visualize.
 
-Two fake dataset to show the possibilities of the package has been created, and they can be accessed using the `data(PolicyPortfolio)` call.
+Two fake datasets to show the possibilities of the package have been created, and they can be accessed using the `data(P.education)` and `data(P.energy)` calls.
 
 There are two portfolios, one in the energy sector (`P.energy`) and one in the education sector (`P.education`).
 The energy one looks like follows:
 ```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
 library(devtools)
 load_all("~/est/packages/PolicyPortfolios")
-data(PolicyPortfolio)
+data(P.energy)
 P.energy
 ```
 ```{r, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
 library(PolicyPortfolios)
-data(PolicyPortfolio)
+data(P.energy)
 P.energy
 ```
 
@@ -101,6 +101,7 @@ and Instruments is different. For instance, in the portfolio of the education
 sector, the countries and years are equal as in the energy, but the targets and
 instruments differ:
 ```{r}
+data(P.education)
 levels(P.education$Target)
 levels(P.education$Instrument)
 ```
@@ -111,10 +112,10 @@ The function `pp_clean()` may help in transforming the data from a
 spreadsheet-like format into a tidy format.
 
 By default, it uses a structure coming from the
-[consensus](http://publicpolicy-knill.org/forschung/consensus/) research
-project. [Guidelines](http://www.gsi.uni-muenchen.de/lehreinheiten/ls_emp_theo/forschung/dokumente/guidelinesconsensus.pdf) for external experts to collect data on
+[consensus](https://publicpolicy-knill.org/?post-type=research&post_id=122) research
+project. [Guidelines](https://www.gsi.uni-muenchen.de/lehreinheiten/ls_emp_theo/forschung/dokumente/guidelinesconsensus.pdf) for external experts to collect data on
 social and environmental policies are available, as well as the [coding
-manual](http://www.gsi.uni-muenchen.de/lehreinheiten/ls_emp_theo/forschung/dokumente/codingmanual.pdf).
+manual](https://www.gsi.uni-muenchen.de/lehreinheiten/ls_emp_theo/forschung/dokumente/codingmanual.pdf).
 An example of a speardsheet collecting data for policy portfolios in the
 Consensus project is the following:
 ![Example of a spreadsheet collecting data for the environmental portfolio of Singapore, following the guidelines and coding style of the CONSENSUS project.](spreadsheet.png){width=800px}.
