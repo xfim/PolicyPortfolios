@@ -6,8 +6,8 @@
 PolicyPortfoliosStartupMessage <- function()
 {
   msg <- c(paste0("PolicyPortfolios version ", 
-           packageVersion("PolicyPortfolios")),
-           "\nType 'citation(\"PolicyPortfolios\")' for citing this R package or the datasets in publications.")
+           utils::packageVersion("PolicyPortfolios")),
+           "\nType 'citation(\"PolicyPortfolios\")' for citing this R package\nor its datasets in publications.")
   return(msg)
 }
 
@@ -16,7 +16,7 @@ PolicyPortfoliosStartupMessage <- function()
   # startup message
   msg <- PolicyPortfoliosStartupMessage()
   if(!interactive())
-    msg[1] <- paste("Package 'PolicyPortfolios' version", packageVersion("PolicyPortfolios"))
+    msg[1] <- paste("Package 'PolicyPortfolios' version", utils::packageVersion("PolicyPortfolios"))
   packageStartupMessage(msg)      
   invisible()
 }
