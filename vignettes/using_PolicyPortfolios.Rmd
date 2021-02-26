@@ -58,13 +58,8 @@ Two fake datasets to show the possibilities of the package have been created, an
 
 There are two portfolios, one in the energy sector (`P.energy`) and one in the education sector (`P.education`).
 The energy one looks like follows:
-```{r, echo = FALSE, eval = TRUE, message = FALSE, warning = FALSE}
-library(devtools)
-load_all("~/est/packages/PolicyPortfolios")
-data(P.energy)
-P.energy
-```
-```{r, echo = TRUE, eval = FALSE, message = FALSE, warning = FALSE}
+
+```{r, message = FALSE, warning = FALSE}
 library(PolicyPortfolios)
 data(P.energy)
 P.energy
@@ -288,7 +283,7 @@ intervention or not.
 
 
 # Development
-The development of `PolicyPortfolios` (track changes, propose improvements, report bugs) can be followed at [https://github.com/xfim/PolicyPortfolios](github).
+The development of `PolicyPortfolios` (track changes, propose improvements, report bugs) can be followed at [github](https://github.com/xfim/PolicyPortfolios/).
 
 
 <!--
