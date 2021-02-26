@@ -37,7 +37,7 @@ bibentry(bibtype = "Article",
   volume       = "5",
   issue        = "4",
   pages        = "427-444",
-  doi          = "10.1111/j.1748-5991.2012",
+  doi          = "10.1111/j.1748-5991.2012.01150.x",
   header       = "When using the CONSENSUS dataset, please cite:",
   textVersion  =
   paste("Knill, Schulze & Tosun (2012).",
