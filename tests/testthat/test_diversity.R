@@ -7,7 +7,7 @@ calc.aid <- consensus %>%
   filter(Country %in% c("France", "United States")) %>%
   filter(Year %in% c(1976, 2005)) %>%
   pp_array() %>%
-  apply(., c(1, 2, 3), diversity) %>%
+  apply(., c(1, 2, 3), diversity_aid) %>%
   as.vector() %>%
   round(digits = 3)
 
