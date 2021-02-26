@@ -6,7 +6,7 @@
 #' @param id A list with up to two elements, namely "Country", and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed.
 #' @param spacing Logical value. When TRUE, some space is added between tiles to help distinguish adjacent spaces. Defaults to FALSE.
 #' @param subtitle Logical value. When TRUE (the default), a subtitle with the measures of the portfolio is included.
-#' @param caption A character vector to overimpose the Source of the data. By default, publicpolicy-knill.org. When NULL, the caption is not printed.
+#' @param caption A character vector to overimpose the Source of the data. For the CONSENSUS dataset, please use "citation(PolicyPortfolios)" to properly cite its source.
 #' @return A tidy dataset containing the portfolio identificators (Country, Sector and Year) plus the Measure identificators (Measure and Measure.label) and the value of the portfolio characteristic.
 #' @export
 #' @examples
@@ -14,7 +14,7 @@
 #' pp_plot(P.education, id = list(Country = "Borduria", Year = 2025))
 pp_plot <- function(D, id = NULL,
                     spacing = FALSE,
-                    subtitle = TRUE, caption = "Source: publicpolicy-knill.org") {
+                    subtitle = TRUE, caption = NULL) {
   # Manage passing only certain portfolio identificators
   if (!is.null(id)) {
     D <- pass.id(D, id)
