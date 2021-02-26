@@ -85,7 +85,7 @@ pp_measures <- function(D, id = NULL) {
         Configurations <- length(C)
         Unique <- length(which(C == 1))
         C.eq <- 1 - ineq::Gini(C)
-        Div.aid <- diversity(P)
+        Div.aid <- diversity_aid(P)
         Div.gs <- vegan::diversity(apply(P, 1, sum), index = "simpson")
         Div.sh <- vegan::diversity(apply(P, 1, sum), index = "shannon", base = 2)
         Eq.sh <- Div.sh / log(dim(P)[1], base = 2)
