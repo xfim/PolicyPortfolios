@@ -12,6 +12,7 @@ if (base::getRversion() >= "2.15.1") {
     "Method", "Method.label", # from pp_similarity()
     "value", # from pp_similarity()
     "error", # from pp_similarity()
+    "packageVersion", # from utils, for startup message
     "browseURL" # from utils, for pp_plot()
   ))
 }
