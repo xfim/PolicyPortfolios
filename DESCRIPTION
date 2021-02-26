@@ -4,13 +4,12 @@ Description: Tools for simplifying the creation and management of data structure
     suitable for dealing with policy portfolios, that is, two-dimensional spaces 
     of policy instruments and policy targets. The package also allows to generate measures of
     portfolio characteristics and facilitates their visualization.
-Version: 0.1
+Version: 0.2.2
 Authors@R: person(given = "Xavier", family = "Fernández i Marín", email = "xavier.fim@gmail.com", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9522-8870"))
-Maintainer: Xavier Fernández i Marín <xavier.fim@gmail.com>
 Depends:
-    R (>= 3.5)
+    R (>= 3.5),
+    dplyr (>= 1.0),
 Imports:
-    dplyr,
     ggplot2,
     vegan,
     ineq,
