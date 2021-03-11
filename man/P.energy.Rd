@@ -3,12 +3,18 @@
 \docType{data}
 \name{P.energy}
 \alias{P.energy}
-\title{Simulated policy portfolio with fake data .}
-\format{A data frame containing the coverage of state intervention in a specific policy space (presence = 1 or absence = 0) .}
+\title{Simulated policy portfolio with fake data for the energy sector.}
+\format{
+A data frame (tibble) containing the coverage of state intervention in a specific policy space (presence = 1 or absence = 0).
+}
 \usage{
-P.energy
+data(P.energy)
 }
 \description{
 A tidy dataset of a policy portfolio in an imaginary sector (energy), containing 3 countries, 15 Instruments and 25 Targets, for 11 years.
+}
+\examples{
+data(P.energy)
+str(P.energy)
 }
 \keyword{datasets}

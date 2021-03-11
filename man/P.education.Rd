@@ -3,12 +3,18 @@
 \docType{data}
 \name{P.education}
 \alias{P.education}
-\title{Simulated policy portfolio with fake data.}
-\format{A data frame containing the coverage of state intervention in a specific policy space (presence = 1 or absence = 0) .}
+\title{Simulated policy portfolio with fake data for the education sector.}
+\format{
+A data frame (tibble) containing the coverage of state intervention in a specific policy space (presence = 1 or absence = 0).
+}
 \usage{
-P.education
+data(P.education)
 }
 \description{
 A tidy dataset of a policy portfolio in an imaginary sector (education), containing 3 countries, 10 Instruments and 15 Targets, for 11 years.
+}
+\examples{
+data(P.education)
+str(P.education)
 }
 \keyword{datasets}

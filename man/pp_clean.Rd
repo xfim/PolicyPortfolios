@@ -4,11 +4,20 @@
 \alias{pp_clean}
 \title{Tidy a dataset with a "long" policy portfolio structure}
 \usage{
-pp_clean(d, Sector = NULL, Country.name = "Country",
-  Year.name = "Year", Instrument.name = "Instrument",
-  Target.name = "Target", coding.category.name = "Coding category",
-  coding.category = 2, Direction.name = "Direction",
-  directions = c(0, 1, -1), debug = FALSE)
+pp_clean(
+  d,
+  Sector = NULL,
+  Country.name = "Country",
+  Year.name = "Year",
+  Instrument.name = "Instrument",
+  Target.name = "Target",
+  coding.category.name = "Coding category",
+  coding.category = 2,
+  Direction.name = "Direction",
+  directions = c(0, 1, -1),
+  associated.vars = NULL,
+  debug = FALSE
+)
 }
 \arguments{
 \item{d}{Data frame in an uncleaned and untidy structure containing data from a policy portfolio.}
@@ -30,6 +39,8 @@ pp_clean(d, Sector = NULL, Country.name = "Country",
 \item{Direction.name}{Character vector of length one with the name of the variable that contains the direction of the policy change.}
 
 \item{directions}{Numerical vector with the numeric values of the direction of the policy changes, namely "Status quo", "Expansion" and "Dismantling". Defaults to, 0, 1 and -1, respectively.}
+
+\item{associated.vars}{Character vector indicating variables that contain characteristics of the policy space.}
 
 \item{debug}{Logical value. When TRUE, print more verbose information about the cleaning process.}
 }

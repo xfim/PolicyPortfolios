@@ -15,10 +15,10 @@ pp_array(D, return_matrix = FALSE)
 An array when return_single is FALSE (the default), or a two-dimensional matrix with Instruments and Targets as first and second dimensions, respectively.
 }
 \description{
-Calculate measures of interest of a policy portfolio and plot it.
+Take a tidy dataset containing one or several policy portfolios and convert it into a matrix or an array.
 }
 \examples{
-data(PolicyPortfolio)
+data(P.education)
 # Returns an array
 A <- pp_array(P.education)
 dim(A)

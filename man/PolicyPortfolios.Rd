@@ -4,14 +4,17 @@
 \name{PolicyPortfolios}
 \alias{PolicyPortfolios}
 \alias{policyportfolios}
-\alias{PolicyPortfolios-package}
 \title{Tools for managing, measuring and visualizing policy portfolios}
 \description{
-PolicyPortfolios simplifies the creation of data structures suitable
+Tools for simplifying the creation and management of data structures suitable
 for dealing with policy portfolios, that is, two-dimensional spaces of
-of policy instruments and policy targets. It allows to generates measures of
-their characteristics and facilitates its visualization.
+of policy instruments and policy targets. It allows to generate measures of
+portfolio characteristics and facilitates their visualization.
 }
 \references{
-\url{http://xavier-fim.net/packages/PolicyPortfolios}.
+\url{http://xavier-fim.net/packages/PolicyPortfolios/}.
+
+Fernández-i-Marín, X., Knill, C. & Steinebach, Y. (2021). Studying Policy Design Quality in Comparative Perspective. _American Political Science Review_, online first.
+
+Knill, C., Schulze, K. & Tosun, J. (2012). Regulatory Policy Outputs and Impacts. Exploring a Complex Relationship. _Regulation & Governance_, 5(4), 427-444. doi:10.1111/j.1748-5991.2012.01150.x.
 }

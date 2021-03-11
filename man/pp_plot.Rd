@@ -4,8 +4,7 @@
 \alias{pp_plot}
 \title{Plot a policy portfolio}
 \usage{
-pp_plot(D, id = NULL, spacing = FALSE, subtitle = TRUE,
-  caption = "Source: publicpolicy-knill.org")
+pp_plot(D, id = NULL, spacing = FALSE, subtitle = TRUE, caption = NULL)
 }
 \arguments{
 \item{D}{Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.}
@@ -16,7 +15,7 @@ pp_plot(D, id = NULL, spacing = FALSE, subtitle = TRUE,
 
 \item{subtitle}{Logical value. When TRUE (the default), a subtitle with the measures of the portfolio is included.}
 
-\item{caption}{A character vector to overimpose the Source of the data. By default, publicpolicy-knill.org. When NULL, the caption is not printed.}
+\item{caption}{A character vector to overimpose the Source of the data. For the CONSENSUS dataset, please use "citation(PolicyPortfolios)" to properly cite its source.}
 }
 \value{
 A tidy dataset containing the portfolio identificators (Country, Sector and Year) plus the Measure identificators (Measure and Measure.label) and the value of the portfolio characteristic.
@@ -25,6 +24,6 @@ A tidy dataset containing the portfolio identificators (Country, Sector and Year
 Plot a policy portfolio.
 }
 \examples{
-data(PolicyPortfolio)
+data(P.education)
 pp_plot(P.education, id = list(Country = "Borduria", Year = 2025))
 }

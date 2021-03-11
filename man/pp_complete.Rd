@@ -4,8 +4,7 @@
 \alias{pp_complete}
 \title{Complete a policy portfolio}
 \usage{
-pp_complete(D, year.range = NULL, Instrument.set = NULL,
-  Target.set = NULL)
+pp_complete(D, year.range = NULL, Instrument.set = NULL, Target.set = NULL)
 }
 \arguments{
 \item{D}{Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.}
@@ -24,7 +23,7 @@ Complete an already tidy dataset with the full set of instruments, targets and y
 Used also to specify the order of instruments and targets.
 }
 \examples{
-data(PolicyPortfolio)
+data(P.education)
 range(P.education$Year)
 
 P.education.full <- pp_complete(P.education, year.range = c(2000, 2035))

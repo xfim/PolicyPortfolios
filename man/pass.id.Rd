@@ -9,12 +9,14 @@ pass.id(D, id = NULL)
 \arguments{
 \item{D}{Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.}
 
-\item{id}{A list with up to two elements, namely "Country", and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed.}
+\item{id}{A list with up to three elements, namely "Country", "Sector" and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed; and optionally "clean" (logical, FALSE by default) to remove non observed factor levels in Instruments, Targets, Country, Sector and Year.}
 }
 \value{
-A Data frame with a subsect of D defined by id.
+A Data frame (tibble) with a part of the original input, defined by id.
 }
 \description{
-Internal function used to select a subset of cases (Country / Year)
+Internal function used to select a subset of cases (Country / Sector / Year)
 from a tidy dataset with portfolio data.
+When subsetting a sector, the remaining object limits the results to the available
+Instruments and Sectors found in the original object.
 }

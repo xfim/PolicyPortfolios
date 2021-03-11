@@ -4,10 +4,21 @@
 \alias{pp_report}
 \title{Produce a report of policy portfolios}
 \usage{
-pp_report(D, id = NULL, file = NULL, title = NULL,
-  plot = c("single", "comparative"), text = TRUE, width = 12,
-  height = 7, comparative = c("temporal", "static"), between = "",
-  within = "", dev_type_html = "svg", ...)
+pp_report(
+  D,
+  id = NULL,
+  file = NULL,
+  title = NULL,
+  plot = c("single", "comparative"),
+  text = TRUE,
+  width = 12,
+  height = 7,
+  comparative = c("temporal", "static"),
+  between = "",
+  within = "",
+  dev_type_html = "svg",
+  ...
+)
 }
 \arguments{
 \item{D}{Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.}
@@ -18,7 +29,7 @@ pp_report(D, id = NULL, file = NULL, title = NULL,
 
 \item{title}{A character vector with the title of the report. If no title is passed, the default (NULL) is to use the id, or a generic title with the date and time of its production.}
 
-\item{plot}{A character vector with the types of plot to perform. If no plot is desired, set it to NULL. By defaults it plots individual portfolios ("single") as well as comparative figures with portfolio measures ("comparative").}
+\item{plot}{A character vector with the types of plot to perform. If no plot is desired, set it to NULL. By default it plots individual portfolios ("single") as well as comparative figures with portfolio measures ("comparative").}
 
 \item{text}{A logical vector of whether in the case of single portfolios a textual report should be included.}
 
@@ -44,7 +55,7 @@ Produce a report of policy portfolios.
 }
 \examples{
 \dontrun{
-data(PolicyPortfolio)
+data(P.education)
 pp_report(P.education)
 
 pp_report(P.education, id = list(Country = "Borduria", Year = 2025))

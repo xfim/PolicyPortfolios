@@ -18,11 +18,20 @@ A tidy dataset containing the portfolio identificators (Country, Sector and Year
 Calculate measures of interest of a policy portfolio.
 }
 \examples{
-data(PolicyPortfolio)
+data(P.education)
 m.education <- pp_measures(P.education)
 m.education
 
 # Calculate portfolio measures for a restricted set of portfolios defined by a list.
+data(P.energy)
 m.energy <- pp_measures(P.energy, id = list(Country = "Borduria", Year = 2022))
 m.energy
+}
+\references{
+Fernández-i-Marín, X., Knill, C. & Steinebach, Y. (2021). Studying Policy Design Quality in Comparative Perspective. _American Political Science Review_, online first. For Average Instrument Diversity.
+
+Adam, C., Knill, C. & Fernández-i-Marín, X. (2016). Rule growth and government effectiveness: why it takes the capacity to learn and coordinate to constrain rule growth. _Policy Sciences_, 50, 241–268. doi:10.1007/s11077-016-9265-x. For portfolio size.
+}
+\seealso{
+\code{\link{diversity}} for Average Instrument Diversity, \code{\link[ineq]{Gini}}, \code{\link[vegan]{diversity}} \code{\link{configurations}}.
 }
