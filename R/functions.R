@@ -24,10 +24,12 @@ configurations <- function(M) {
 pass.id <- function(D, id = NULL) {
   if (!is.null(id)) {
     if (!is.null(id$Sector)) {
-      D <- dplyr::filter(D, Sector %in% id$Sector)
+      D <- dplyr::filter(D, Sector %in% id$Sector) %>%
+        droplevels()
     }
     if (!is.null(id$Country)) {
-      D <- dplyr::filter(D, Country %in% id$Country)
+      D <- dplyr::filter(D, Country %in% id$Country) %>%
+        droplevels()
     }
     if (!is.null(id$Year)) {
       D <- dplyr::filter(D, Year %in% id$Year)
