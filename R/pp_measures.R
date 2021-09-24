@@ -91,19 +91,25 @@ pp_measures <- function(D, id = NULL) {
         Eq.sh <- Div.sh / log(dim(P)[1], base = 2)
         # On average, how many instruments per target?
         In.Prep <- sum(apply(P, 2, function(x) length(which(x > 0)))) / n.Targets
+        # Different learning assumptions make portfolio size convert into burden
+        Burden.continuous <- burden(A = P, nI = nIn, nT = nIt, learning = "continuous")
+        Burden.steep <- burden(A = P, nI = nIn, nT = nIt, learning = "steep")
+        Burden.capped <- burden(A = P, nI = nIn, nT = nIt, learning = "capped")
         # Arrange it in a tidy dataframe
         O.measures.value <- c(Space, Size,
                               n.Instruments, p.Instruments,
                               n.Targets, p.Targets,
                               Unique, C.eq,
                               Div.aid, Div.gs, Div.sh, Eq.sh,
-                              In.Prep)
+                              In.Prep,
+                              Burden.continuous, Burden.steep, Burden.capped)
         O.measures.name <- c("Space", "Size",
                              "n.Instruments", "p.Instruments",
                              "n.Targets", "p.Targets",
                              "Unique", "C.eq",
                              "Div.aid", "Div.gs", "Div.sh", "Eq.sh",
-                             "In.Prep")
+                             "In.Prep",
+                             "Burden.continuous", "Burden.steep", "Burden.capped")
         O.measures.label <- c("Portfolio space",
                               "Portfolio size",
                               "Number of instruments covered",
@@ -115,7 +121,10 @@ pp_measures <- function(D, id = NULL) {
                               "Diversity (Average Instrument Diversity)",
                               "Diversity (Gini-Simpson)", "Diversity (Shannon)",
                               "Equitability (Shannon)",
-                              "Instrument preponderance")
+                              "Instrument preponderance",
+                              "Burden (continuous learning)",
+                              "Burden (steep learning)",
+                              "Burden (capped learning)")
         nrep <- length(O.measures.value)
         O.full <- dplyr::tibble(Country = rep(Countries[c], nrep),
                                     Sector = rep(Sectors[s], nrep),
