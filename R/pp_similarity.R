@@ -56,7 +56,7 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
   # Deal with methods
   all.methods <- c("Jaccard", "Hamming", "Dice", "Overlap", "Rand")
   all.methods.labels <- c("Similarity (Jaccard)", 
-                          "Similarity (Hamming)",
+                          "Distance (Hamming)",
                           "Similarity (S\u00f8rensen\u002DDice)",
                           "Similarity (Szymkiewicz\u002DSimpson)",
                           "Similarity (Rand or Simple Matching Coefficient)")
@@ -65,13 +65,13 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
       methods <- all.methods
       methods.labels <- all.methods.labels
     } else {
-      error("No valid method provided.")
+      stop("No valid method provided.")
     }
   }
   if (length(method) != 1) {
     which.methods <- which(all.methods %in% method)
     if (length(which.methods) == 0) {
-      error("No valid method provided.")
+      stop("No valid method provided.")
     }
     methods <- all.methods[which.methods]
     methods.labels <- all.methods.labels[which.methods]
