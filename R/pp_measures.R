@@ -92,9 +92,14 @@ pp_measures <- function(D, id = NULL) {
         # On average, how many instruments per target?
         In.Prep <- sum(apply(P, 2, function(x) length(which(x > 0)))) / n.Targets
         # Different learning assumptions make portfolio size convert into burden
+        # Raw burden refers to instruments
         Burden.continuous <- burden(A = P, nI = nIn, nT = nIt, learning = "continuous")
         Burden.steep <- burden(A = P, nI = nIn, nT = nIt, learning = "steep")
         Burden.capped <- burden(A = P, nI = nIn, nT = nIt, learning = "capped")
+        # Burden.targets refers to weights by instruments
+        Burden.targets.continuous <- burden(A = P, nI = nIn, nT = nIt, learning = "continuous", weight_by = "target")
+        Burden.targets.steep <- burden(A = P, nI = nIn, nT = nIt, learning = "steep", weight_by = "target")
+        Burden.targets.capped <- burden(A = P, nI = nIn, nT = nIt, learning = "capped", weight_by = "target")
         # Arrange it in a tidy dataframe
         O.measures.value <- c(Space, Size,
                               n.Instruments, p.Instruments,
@@ -102,14 +107,16 @@ pp_measures <- function(D, id = NULL) {
                               Unique, C.eq,
                               Div.aid, Div.gs, Div.sh, Eq.sh,
                               In.Prep,
-                              Burden.continuous, Burden.steep, Burden.capped)
+                              Burden.continuous, Burden.steep, Burden.capped,
+                              Burden.targets.continuous, Burden.targets.steep, Burden.targets.capped)
         O.measures.name <- c("Space", "Size",
                              "n.Instruments", "p.Instruments",
                              "n.Targets", "p.Targets",
                              "Unique", "C.eq",
                              "Div.aid", "Div.gs", "Div.sh", "Eq.sh",
                              "In.Prep",
-                             "Burden.continuous", "Burden.steep", "Burden.capped")
+                             "Burden.continuous", "Burden.steep", "Burden.capped",
+                             "Burden.targets.continuous", "Burden.targets.steep", "Burden.targets.capped")
         O.measures.label <- c("Portfolio space",
                               "Portfolio size",
                               "Number of instruments covered",
@@ -124,7 +131,10 @@ pp_measures <- function(D, id = NULL) {
                               "Instrument preponderance",
                               "Burden (continuous learning)",
                               "Burden (steep learning)",
-                              "Burden (capped learning)")
+                              "Burden (capped learning)",
+                              "Burden (weight by targets, continuous learning)",
+                              "Burden (weight by targets, steep learning)",
+                              "Burden (weight by targets, capped learning)")
         nrep <- length(O.measures.value)
         O.full <- dplyr::tibble(Country = rep(Countries[c], nrep),
                                     Sector = rep(Sectors[s], nrep),

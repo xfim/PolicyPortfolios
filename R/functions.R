@@ -52,7 +52,7 @@ pass.id <- function(D, id = NULL) {
   }
 }
 
-#' Calculate burden based on how different learning assumptions  affect portfolio size
+#' Calculate burden based on how different learning assumptions affect portfolio size
 #'
 #' Internal function to calculate a transformation of portfolio size based on a
 #' non-regular assumption of how policy learning works at the instrument level.
@@ -69,10 +69,18 @@ pass.id <- function(D, id = NULL) {
 #' @param M Matrix with the policy portfolio, where the first dimension contains instruments and the second contains targets.
 #' @param nI Integer with the number of Instruments.
 #' @param nT Integer with the number of Targets.
+#' @param weight_by By default learning assumptions are done on different instrument levels ("instrument"). But it is also possible to use Target levels when using "target".
 #' @return A value of burden (portfolio size using a different learning assumption).
-burden <- function(A, nI, nT, learning) {
+burden <- function(A, nI, nT, learning, weight_by = "instrument") {
   if (is.null(learning)) {
     stop("A learning assumption must be passed Please use 'continuous', 'steep' or 'capped'.")
+  }
+  if (weight_by == "target") { # simply revert the values
+    nInew <- nT
+    nTnew <- nI
+    nT <- nTnew
+    nI <- nInew
+    A <- t(A)
   }
   sum.i <- apply(A, 1, sum)
   if (!is.na(sum.i)) {
