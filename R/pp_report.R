@@ -141,7 +141,7 @@ pp_report <- function(D, id = NULL, file = NULL, title = NULL,
     cat("\n# Comparative analysis\n")
     DM <- pp_measures(D)
 
-    cat("```{r echo = FALSE}\nkable(unique(dplyr::select(DM, Measure, Label = Measure.label)))\n```")
+    cat("```{r echo = FALSE}\nkable(unique(dplyr::select(DM, Measure, Label = Measure.label)))\n```\n\n")
 
     # When there is temporal dynamics
     if ("temporal" %in% comparative & length(unique(DM$Year)) > 1) {
@@ -149,8 +149,7 @@ pp_report <- function(D, id = NULL, file = NULL, title = NULL,
       cat("```{r echo = FALSE}
       f <- ggplot(DM, aes(x = Year, y = value, group = Country, color = Country)) +
         geom_line() +
-        facet_wrap(~ Measure, scales = \"free_y\")
-      ```\n\n")
+        facet_wrap(~ Measure, scales = \"free_y\")\n```\n\n")
       #cat(paste("```{r, echo = FALSE, fig.width = ", w, ", fig.height = ", h, "}\nprint(f)\n```\n\n", sep = ""))
       cat(paste("```{r, echo = FALSE, fig.width = ", w, ", fig.height = ", h, "}\nf\n```\n\n", sep = ""))
     }

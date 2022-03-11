@@ -74,6 +74,8 @@ pp_complete <- function(D, year.range = NULL,
   D <- D %>%
     dplyr::mutate(covered = ifelse(is.na(covered), 0, covered)) %>%
     # Ensure factors in the correct order
+    dplyr::mutate(Country = factor(Country)) %>%
+    dplyr::mutate(Sector = factor(Sector)) %>%
     dplyr::mutate(Instrument = factor(Instrument, levels = Instrument.set)) %>%
     dplyr::mutate(Target= factor(Target, levels = Target.set))
 
