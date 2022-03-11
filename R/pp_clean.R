@@ -13,7 +13,7 @@
 #' @param Direction.name Character vector of length one with the name of the variable that contains the direction of the policy change.
 #' @param directions Numerical vector with the numeric values of the direction of the policy changes, namely "Status quo", "Expansion" and "Dismantling". Defaults to, 0, 1 and -1, respectively.
 #' @param associated.vars Character vector indicating variables that contain characteristics of the policy space.
-#' @param date. By default, return Year as the only time indicator. If TRUE, return the full date with dd-mm-YYYY.
+#' @param date By default, return Year as the only time indicator. If TRUE, return the full date with dd-mm-YYYY.
 #' @param debug Logical value. When TRUE, print more verbose information about the cleaning process.
 #' @return D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
 #' @export
