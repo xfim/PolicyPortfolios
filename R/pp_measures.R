@@ -93,13 +93,13 @@ pp_measures <- function(D, id = NULL) {
         In.Prep <- sum(apply(P, 2, function(x) length(which(x > 0)))) / n.Targets
         # Different learning assumptions make portfolio size convert into burden
         # Raw burden refers to instruments
-        Burden.continuous <- burden(A = P, nI = nIn, nT = nIt, learning = "continuous")
-        Burden.steep <- burden(A = P, nI = nIn, nT = nIt, learning = "steep")
-        Burden.capped <- burden(A = P, nI = nIn, nT = nIt, learning = "capped")
+        Burden.continuous <- burden(M = P, nI = nIn, nT = nIt, learning = "continuous")
+        Burden.steep <- burden(M = P, nI = nIn, nT = nIt, learning = "steep")
+        Burden.capped <- burden(M = P, nI = nIn, nT = nIt, learning = "capped")
         # Burden.targets refers to weights by instruments
-        Burden.targets.continuous <- burden(A = P, nI = nIn, nT = nIt, learning = "continuous", weight_by = "target")
-        Burden.targets.steep <- burden(A = P, nI = nIn, nT = nIt, learning = "steep", weight_by = "target")
-        Burden.targets.capped <- burden(A = P, nI = nIn, nT = nIt, learning = "capped", weight_by = "target")
+        Burden.targets.continuous <- burden(M = P, nI = nIn, nT = nIt, learning = "continuous", weight_by = "target")
+        Burden.targets.steep <- burden(M = P, nI = nIn, nT = nIt, learning = "steep", weight_by = "target")
+        Burden.targets.capped <- burden(M = P, nI = nIn, nT = nIt, learning = "capped", weight_by = "target")
         # Arrange it in a tidy dataframe
         O.measures.value <- c(Space, Size,
                               n.Instruments, p.Instruments,
