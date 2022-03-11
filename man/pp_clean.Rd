@@ -16,6 +16,7 @@ pp_clean(
   Direction.name = "Direction",
   directions = c(0, 1, -1),
   associated.vars = NULL,
+  date = FALSE,
   debug = FALSE
 )
 }
@@ -41,6 +42,8 @@ pp_clean(
 \item{directions}{Numerical vector with the numeric values of the direction of the policy changes, namely "Status quo", "Expansion" and "Dismantling". Defaults to, 0, 1 and -1, respectively.}
 
 \item{associated.vars}{Character vector indicating variables that contain characteristics of the policy space.}
+
+\item{date}{By default, return Year as the only time indicator. If TRUE, return the full date with dd-mm-YYYY.}
 
 \item{debug}{Logical value. When TRUE, print more verbose information about the cleaning process.}
 }

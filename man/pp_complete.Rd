@@ -4,7 +4,13 @@
 \alias{pp_complete}
 \title{Complete a policy portfolio}
 \usage{
-pp_complete(D, year.range = NULL, Instrument.set = NULL, Target.set = NULL)
+pp_complete(
+  D,
+  year.range = NULL,
+  Instrument.set = NULL,
+  Target.set = NULL,
+  date = FALSE
+)
 }
 \arguments{
 \item{D}{Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.}
@@ -14,6 +20,8 @@ pp_complete(D, year.range = NULL, Instrument.set = NULL, Target.set = NULL)
 \item{Instrument.set}{Ordered factor with the full set of values of Instruments, to be combined with the already existing Instruments.}
 
 \item{Target.set}{Ordered factor with the full set of values of Targets, to be combined with the already existing Targets.}
+
+\item{date}{By default a portfolio by every year is employed. Otherwise, use a full date (DD-MM-YYYY).}
 }
 \value{
 D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors. It differs from the input in that this one includes the full set of pre-specified Instruments, Targets and temporal range.

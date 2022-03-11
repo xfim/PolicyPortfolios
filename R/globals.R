@@ -2,6 +2,7 @@
 if (base::getRversion() >= "2.15.1") {
   utils::globalVariables(c(
     "Country", "Sector", "Year", "Instrument", "Target", "covered",  # from the tidy dataset
+    "Date", # from the tidy dataset
     "direction", "cc", # from pp_clean()
     "Measure", "Measure.label", # from pp_measures()
     "comparative", "dev_type_html", # from pp_report()

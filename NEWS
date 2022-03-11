@@ -1,0 +1,25 @@
+Version 0.3
+------------------------------
+
+MAJOR CHANGES
+
+  - Allow for portfolios to be cleaned and completed on a day-to-day basis
+  instead of only allowing for a year-to-year
+
+  - New measure of burden based on portfolio size, but assuming some instrument
+  or target-based learning mechanism is happening.
+
+
+MINOR CHANGES
+
+  - Fixed a bug in the production of reports due to country and sector not
+  passing correctly as factors.
+
+  - Remove warnings by properly addressing the removal of levels.
+
+
+
+Version 0.2.2
+------------------------------
+
+Real initial production version with most of the features present.
