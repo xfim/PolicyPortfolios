@@ -93,17 +93,17 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
   O <- NULL
   O <- list()
   i <- 1
-  for (s in 1:nS) {
-    for (c in 1:nC) {
+  for (s in seq_len(nS)) {
+    for (c in seq_len(nC)) {
       message("Processing country: ", Countries[c], sep = "")
-      for (y in 1:nY) {
+      for (y in seq_len(nY)) {
         message("Processing year: ", Years[y], sep = "")
         P.origin <- P.full[c,s,y,,]
-        for (c.dest in 1:nC) {
-          for (y.dest in 1:nY) {
+        for (c.dest in seq_len(nC)) {
+          for (y.dest in seq_len(nY)) {
             P.destination <- P.full[c.dest,s,y.dest,,]
             similarity <- NULL
-            for (m in 1:nMethods) {
+            for (m in seq_len(nMethods)) {
               # Most formulas need the following:
               # ioid: cases where 1's are IN ORIGIN (io) and IN DESTINATION (id)
               # compared to cases NOT IN ORIGIN (nio) and/or NOT IN DESTINATION (nid)
@@ -162,7 +162,7 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
   # Clean years for which some countries do not have data
   if (clean.years) {
     clean.countries <- as.character(D.years.n$Country[D.years.n$N < max(D.years.n$N)])
-    for (c in 1:length(clean.countries)) {
+    for (c in seq_len(length(clean.countries))) {
       message(paste0("Cleaning years from ", clean.countries[c]))
       extra.years <- as.vector(dplyr::filter(D.years.yn, Country == clean.countries[c] & N == 0)$Year)
       O <- O %>%

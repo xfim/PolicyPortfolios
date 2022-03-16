@@ -1,4 +1,4 @@
-require(testthat)
+library(testthat)
 data(consensus)
 context("Check that diversity (AID) calculation matches APSR")
 

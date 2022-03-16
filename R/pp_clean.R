@@ -141,7 +141,7 @@ pp_clean <- function(d, Sector = NULL,
       dplyr::as_tibble()
   }
   if (!is.null(associated.vars)) {
-    for (av in 1:length(associated.vars)) {
+    for (av in seq_len(length(associated.vars))) {
       D <- mutate(D, avname = NA)
       class(D$avname) <- class(eval(parse(text = paste0("d$`", associated.vars[av], "`"))))
       names(D)[dim(D)[2]] <- associated.vars[av]
@@ -170,7 +170,7 @@ pp_clean <- function(d, Sector = NULL,
       dplyr::group_by(Country, Instrument, Target) %>%
       dplyr::arrange(Country, Instrument, Target, Date, Year)
   }
-  for (o in 1:(dim(D.changes)[1])) {
+  for (o in seq_len(dim(D.changes)[1])) {
     direction.now <- D.changes$direction[o]
     if (!date) {
       position.now <- which(D$Country == D.changes$Country[o] &

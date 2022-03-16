@@ -1,4 +1,4 @@
-require(testthat)
+library(testthat)
 data(P.education)
 data(P.energy)
 context("Convert to array")

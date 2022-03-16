@@ -1,4 +1,4 @@
-require(testthat)
+library(testthat)
 data(P.education)
 context("Measures of policy portfolios")
 
