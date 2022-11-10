@@ -84,7 +84,7 @@ burden <- function(M, nI, nT, learning, weight_by = "instrument") {
     M <- t(M)
   }
   sum.i <- apply(M, 1, sum)
-  if (length(sum.i) > 1) {
+  if (length(sum.i) > 1 & length(which(is.na(sum.i))) != length(sum.i) ) {
     parts <- NULL
     if (learning == "continuous") {
       # arithmetical decay
