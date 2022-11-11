@@ -274,6 +274,19 @@ A <- pp_array(P.energy)
 dim(A)
 ```
 
+Another possibility is the use of `pp_clean()` with the argument
+`setting.direction` set to `TRUE`, in order to get not the portfolio itself, but
+the assessment of the changes in the setting (Scope/Level) and in the direction
+(Expansion/Dismantling).
+
+```{r eval = FALSE, echo = TRUE}
+spreadsheet <- read.table(...)
+d.setting <- pp_clean(spreadsheet,
+                      setting.direction = TRUE)
+```
+
+
+
 # Final remarks
 `PolicyPortfolios` facilitates the generation of measures of policy portfolios
 and its visualization, as well as the cleaning process of such datasets. It only
