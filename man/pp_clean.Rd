@@ -17,6 +17,7 @@ pp_clean(
   directions = c(0, 1, -1),
   associated.vars = NULL,
   date = FALSE,
+  setting.direction = FALSE,
   debug = FALSE
 )
 }
@@ -45,10 +46,12 @@ pp_clean(
 
 \item{date}{By default, return Year as the only time indicator. If TRUE, return the full date with dd-mm-YYYY.}
 
+\item{setting.direction}{Logical. When TRUE, returns not a tidy object with the portfolio, but a summary of changes in the Setting (Level/Scope) and in the Direction (Expansion/Dismantling). Defaults to FALSE.}
+
 \item{debug}{Logical value. When TRUE, print more verbose information about the cleaning process.}
 }
 \value{
-D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
+D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors. When setting.direction = TRUE it returns a summary of changes in the Setting (Level/Scope) and in the Direction (Expansion/Dismantling).
 }
 \description{
 Clean a policy portfolio dataset into a tidy object.
