@@ -4,7 +4,7 @@
 #'
 #' @param D Data frame in a tidy format with the following columns: "Country", "Sector", "Year", "Instrument", "Target" and "covered". "covered" is a binary identificator of whether the portfolio space is covered by policy intervention (1) or not (0). The remaining columns identify the case. Notice that "Year" is a numeric value, while the remaining 4 case identifiers are factors.
 #' @param id A list with up to two elements, namely "Country", and "Year" indicating the specific identification characteristics of the portfolio(s) that must be processed. Defaults to NULL to process all portfolios.
-#' @param method A character vector containing the indices of similarity requested. Defaults to "all". The implemented indices of binary similarity are "jaccard" (), "
+#' @param method A character vector containing the indices of similarity requested. Defaults to "all". The implemented indices of binary similarity are "Jaccard", "Hamming" (Hamming distance), "Dice" (S\u00f8rensen & Dice), "Overlap" (Szymkiewicz and Simpson) and "Rand" (or Simple Matching Coefficient).
 #' @param return_all Logical indicating whether all possible combinations (countries and years of origin and destination) must be returned or only when they are different. Defaults to TRUE.
 #' @return A tidy dataset containing the portfolio identificators (Country, Sector and Year) plus the similarity measures and their values.
 #' @export
@@ -65,7 +65,13 @@ pp_similarity <- function(D, id = NULL, method = "all", return_all = TRUE) {
       methods <- all.methods
       methods.labels <- all.methods.labels
     } else {
-      stop("No valid method provided.")
+      which.methods <- which(all.methods %in% method)
+      if (length(which.methods) == 0) {
+        stop("No valid method provided.")
+      }
+      methods <- all.methods[which.methods]
+      methods.labels <- all.methods.labels[which.methods]
+      message(paste0("Using method: ", paste(methods, sep = "", collapse = ", ")))
     }
   }
   if (length(method) != 1) {
